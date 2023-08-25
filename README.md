@@ -5,7 +5,7 @@
 ## Books Web Application
 
 <p align="center">
-    <img width="100%" src="https://github.com/ukthanki/MIT_MRTS_ETL/assets/42117481/287fc16c-81d0-4b9a-b483-1e6aa881755e">
+    <img width="100%" src="https://github.com/ukthanki/MIT_Books_Web_Application/assets/42117481/b9a29299-7d26-4e47-935f-eee6e297d448">
 </p>
 
 Up to this point in the course, we had learned the following topics:
