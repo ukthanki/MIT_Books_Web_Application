@@ -14,6 +14,7 @@ Up to this point in the course, we had learned the following topics:
 3. SQL
 4. Linear Regression
 5. ETL Fundamentals
+6. Flask
 
 In this project, we explored the Monthly Retail Trade Survey (MRTS) data set for the years 1992-2020 and perform an Extract-Transformation-Load (ETL) process through a variety of steps. This involved processing the data in Python, programmatically creating a MySQL database and table, loading the data into the table, and then using Python to query from the database and analyze it for trends, percentage changes, as well as rolling time windows paired with visualization for enhanced understanding of the data.
 
