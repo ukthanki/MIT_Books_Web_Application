@@ -114,5 +114,3 @@ Consequently, we were also able to verify the other functionality added earlier 
 This project was interesting as it allowed me to implement some basic html, a language I had never used before, and create a tangible web application that has relevant functionality.
 
 **You can view the full Project in the "app.py" file in the Repository.**
-
-[Go to Repo](https://github.com/ukthanki/MIT_Books_Web_Application_Project)
