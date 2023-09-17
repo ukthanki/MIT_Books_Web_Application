@@ -17,7 +17,6 @@ Up to this point in the course, we had learned the following topics:
 6. Flask
 7. Java
 8. CDC Fundamentals
-9. 
 
 In this project, we used the various skills we have learned to build website that shows a collection of books. We added images, users with usernames and passwords to access the site, and applied various roles to alter what actions users are able to perform. The project was presented to us in a way that a majority of the base code was already provided to us and we had to fill in various sections with code.
 
@@ -66,6 +65,12 @@ books = [
         "year": 1623,
     },
 ]
+```
+
+Having added the two books, we had to ensure that the correct book cover images were added to visually identify the entries in the website. This match was achieved by adding the following html to the books.html file:
+
+```html
+<img src="static/image{{book['id']}}.png" width = "50">
 ```
 
 The function is then used in the code below to efficiently output a single Data Frame with all of the data:
