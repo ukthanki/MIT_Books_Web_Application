@@ -69,9 +69,9 @@ books = [
 
 Having added the two books, we had to ensure that the correct book cover images were added to visually identify the entries in the website. This match was achieved by adding the following html to the books.html file:
 
-````html
-<img src="static/image{{book['id']}}.png" width = "50">
-````
+```html
+<img src="static/image\{\{book['id']\}\}.png" width = "50">
+```
 
 The function is then used in the code below to efficiently output a single Data Frame with all of the data:
 
