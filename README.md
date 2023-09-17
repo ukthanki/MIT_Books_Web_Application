@@ -69,7 +69,7 @@ books = [
 
 Having added the two books, we had to ensure that the correct book cover images were added to visually identify the entries in the website. This match was achieved by adding the following html to the books.html file:
 
-```html
+```
 <img src="static/image{{book['id']}}.png" width = "50">
 ```
 
