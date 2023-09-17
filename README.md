@@ -15,41 +15,57 @@ Up to this point in the course, we had learned the following topics:
 4. Linear Regression
 5. ETL Fundamentals
 6. Flask
+7. Java
+8. CDC Fundamentals
+9. 
 
-In this project, we explored the Monthly Retail Trade Survey (MRTS) data set for the years 1992-2020 and perform an Extract-Transformation-Load (ETL) process through a variety of steps. This involved processing the data in Python, programmatically creating a MySQL database and table, loading the data into the table, and then using Python to query from the database and analyze it for trends, percentage changes, as well as rolling time windows paired with visualization for enhanced understanding of the data.
+In this project, we used the various skills we have learned to build website that shows a collection of books. We added images, users with usernames and passwords to access the site, and applied various roles to alter what actions users are able to perform. The project was presented to us in a way that a majority of the base code was already provided to us and we had to fill in various sections with code.
 
-You can learn more about MRTS [here](https://www.census.gov/retail/about_the_surveys.html).
-
-We first started by studying the data in question and its structure so that we can assess how to load it into a Data Frame. Since we were looking at a wide range of years, each year was a separate tab in the raw Excel spreadsheet. In order to analyze the data effectively, we had to compile all of the relevant data into a single Data Frame.
-
-The data had a similar structure in each tab and it was determined that the following cleaning process could be used repeatedly for each year's MRTS data:
-- Reading the sheet into a Data Frame, skipping the first 4 and reading the next 67 rows
-- Dropping the first Unnamed column
-- Renaming the second Unnamed column to "Kind of Business"
-- Transposing the Data Frame
-- Replacing all "(S)" and "(NA)" entries with "0"
-- Removing NaN rows
-- Adding a DateTime column and converting the numeric values to Floats
-
-I saw this as an opportunity to be more efficient with my code by creating a function that does this for all of the required tabs in the Excel spreadsheet, as shown below:
+After installing the required libraries (flask-restful and flask-jwt-extended), I added two more books to the Books List object which initially contained 3 Dictionaries, each being a Book, as shown below:
 
 ```python
-def add_dataframe(list_of_df, year):
-    """Appends a DataFrame to a list that corresponds to the year of a specific sheet of the MRTS Sales Data."""
-    df = pd.read_excel("mrtssales92-present.xls", sheet_name=year, skiprows=4, nrows=67)
-    df.drop(["Unnamed: 0", "TOTAL"], axis=1, inplace=True)
-    df.rename({"Unnamed: 1" : "Kind of Business"}, axis=1, inplace=True)
-    df_trans = df.melt(id_vars="Kind of Business",value_vars=df.columns[1:])
-    df_trans.replace("(S)", "0", inplace=True)
-    df_trans.replace("(NA)", "0", inplace=True)
-    df_trans.dropna(axis=0, inplace=True)
-    df_trans["Period"] = "01 " + df_trans["variable"]
-    df_trans["value"] = df_trans["value"].astype(float)
-    df_trans = df_trans.astype({"Period" : "datetime64[ns]"})
-    df_trans.drop("variable", axis=1, inplace=True)
-    
-    list_of_df.append(df_trans)
-
+books = [
+    {
+        "id": 1,
+        "author": "Eric Reis",
+        "country": "USA",
+        "language": "English",
+        "title": "Lean Startup",
+        "year": 2011,
+    },
+    {
+        "id": 2,
+        "author": "Mark Schwartz",
+        "country": "USA",
+        "language": "English",
+        "title": "A Seat at the Table",
+        "year": 2017,
+    },
+    {
+        "id": 3,
+        "author": "James Womak",
+        "country": "USA",
+        "language": "English",
+        "title": "Lean Thinking",
+        "year": 1996,
+    },
+        {
+        "id": 4,
+        "author": "J.K. Rowling",
+        "country": "UK",
+        "language": "English",
+        "title": "Harry Potter and the Philosopher's Stone",
+        "year": 1997,
+    },
+        {
+        "id": 5,
+        "author": "William Shakespeare",
+        "country": "UK",
+        "language": "English",
+        "title": "Much Ado About Nothing",
+        "year": 1623,
+    },
+]
 ```
 
 The function is then used in the code below to efficiently output a single Data Frame with all of the data:
