@@ -1,0 +1,17 @@
+{% extends "index.html"%}
+{%block content %}
+    <ul class="list-group">
+    {% for book in books %}
+        <li class="list-group-item">
+            <img src="static/image{{book['id']}}.png" width = "50">
+            {{book['author']}},	
+            {{book['title']}},
+            {{book['country']}},
+            {{book['language']}},
+            {{book['pages']}},
+            {{book['year']}}
+            
+        </li>
+    {%endfor%}
+    </ul>
+{%endblock%}
