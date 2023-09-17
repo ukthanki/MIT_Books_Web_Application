@@ -102,42 +102,16 @@ def admin_required(fn):
    return wrapper
 ```
 
-As a result, the data was effectively loaded into the database table, as shown below in Figure 1:
+With these code enhancements, logging into the website shows the following web page, presented in Figure 1:
 
-| ![download](https://github.com/ukthanki/MIT_MRTS_ETL/assets/42117481/ae5ff829-5165-419a-aa87-0663c492c8b0)| 
+| ![image](https://github.com/ukthanki/MIT_Books_Web_Application/assets/42117481/b264e31b-d682-496f-9b52-035672a79c1b)| 
 |:--:| 
-| **Figure 1.** MRTS data loaded into the *mrts* table in MySQL. |
+| **Figure 1.** Screenshot of the Book Web Application Home page. |
 
-I was then able to execute various SELECT statements through Python to visualize the data to gain various insights. For example, by executing the following code below, I was able to plot the data using Matplotlib, as shown below in Figure 2:
+Consequently, we were also able to verify the other functionality added earlier by adding a new book with the "admin" user and seeing the expected error message when attempting to do so with the "reader" user.
 
-```python
-# (5) Retail and food services sales, total Yearly Trend
-query5 = """
-SELECT SUM(`value`), YEAR(period) FROM mrts WHERE kind_of_business = 'Retail and food services sales, total'
-GROUP BY 2 ORDER BY period
-"""
-MyCursor.execute(query5)
-month = []
-sales = []
-for row in MyCursor.fetchall():
-    sales.append(row[0])
-    month.append(row[1])
-    
-plt.plot(month, sales)
-plt.title("Retail and food services sales, total - Yearly")
-plt.xlabel("Year")
-plt.ylabel("Sales (USD, Million)")
-plt.show()
-```
-
-| ![download](https://github.com/ukthanki/MIT_MRTS_ETL/assets/42117481/0ee68c9d-b29c-4251-b37e-93067cfae930)| 
-|:--:| 
-| **Figure 2.** Sales vs. Year for Retail and Food Services. |
-
-This project was quite insightful because it focused heavily on ETL and how it may be done programmatically as opposed to manually. I could have produced the same plots by performing all steps in Python only, but by loading the data in MySQL, it became available to a wider audience for querying and analysis; this represents a real-world situation as a result because data must be accessible easily by multiple entities.
+This project was interesting as it allowed me to implement some basic html, a language I had never used before, and create a tangible web application that has relevant functionality.
 
 **You can view the full Project in the "module_8.py" and "Module 8_Umang_Thanki.ipynb" files in the Repository.**
 
 [Go to Repo](https://github.com/ukthanki/MIT_Books_Web_Application_Project)
-
-In this project, we will modify provided code to create a website that allows users to see a list of books as well as add more books. We will add users, define roles, and ensure that only users with an 'admin' role are allowed to add books.
