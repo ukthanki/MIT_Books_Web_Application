@@ -87,6 +87,21 @@ users = [
 ]
 ```
 
+Finally, we added a function that allows users to add books only if they have been assigned an "admin" role; all other users should see an exception otherwise, as shown below:
+
+```python
+def admin_required(fn):
+   @wraps(fn)
+   def wrapper(*args, **kwargs):
+        verify_jwt_in_request
+        claims = get_jwt()
+        if claims['role'] != 'admin':
+            return jsonify(msg = 'Admins only!'), 403
+        else:
+            return fn(*args, **kwargs)
+   return wrapper
+```
+
 As a result, the data was effectively loaded into the database table, as shown below in Figure 1:
 
 | ![download](https://github.com/ukthanki/MIT_MRTS_ETL/assets/42117481/ae5ff829-5165-419a-aa87-0663c492c8b0)| 
