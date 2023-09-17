@@ -100,6 +100,7 @@ def admin_required(fn):
         else:
             return fn(*args, **kwargs)
    return wrapper
+
 ```
 
 With these code enhancements, logging into the website shows the following web page, presented in Figure 1:
