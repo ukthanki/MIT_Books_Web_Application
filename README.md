@@ -67,7 +67,7 @@ books = [
 ]
 ```
 
-Having added the two books, we had to ensure that the correct book cover images were added to visually identify the entries in the website. This match was achieved by adding the following html to the books.html file:
+Having added the two books, we had to ensure that the correct book cover images were added to visually identify the entries in the website. This match was achieved by adding the following html to the books.html file that connects the "id" field above with the file name that contains the number:
 
 {% raw %}
 ```html
@@ -75,65 +75,16 @@ Having added the two books, we had to ensure that the correct book cover images 
 ```
 {% endraw %}
 
-The function is then used in the code below to efficiently output a single Data Frame with all of the data:
+I also added two more users and assigned one the role of "admin" and the other the role of "reader", as shown below:
 
 ```python
-list_df = []
-years = []
-year = 2020
-while year >= 1992:
-    years.append(str(year))
-    year -= 1
-
-for year in years:
-    add_dataframe(list_df, year)
-    
-df_stacked = pd.concat(list_df)
-df_stacked.reset_index(inplace=True)
-df_stacked.drop("index", axis=1, inplace=True)
-```
-
-I created a separate YAML file that contained the credentials of the database connection that had to be established to load the data into a designated table. The benefit of this type of file is that it stores this sensitive information in a separate file so that it is not hard-coded in the main file.
-
-Once the connection was made, I created the table and loaded the records from the Data Frame into the table, as shown below:
-
-```python
-# Secure Connection to the Database
-db = yaml.safe_load(open("db.yaml"))
-config = {
-    "user":     db["user"],
-    "password": db["pwrd"],
-    "host":     db["host"],
-    "auth_plugin":  "mysql_native_password"
-}
-cnx = mysql.connector.connect(**config)
-
-MyCursor=cnx.cursor()
-queries = []
-
-# Creating the database and the table `mrts`
-queries.append("DROP DATABASE IF EXISTS mrtsdb")
-queries.append("CREATE DATABASE mrtsdb")
-queries.append("USE mrtsdb")
-queries.append("""CREATE TABLE mrts (
-    kind_of_business VARCHAR (300) NOT NULL,
-    value FLOAT NOT NULL,
-    period DATE NULL) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4 COLLATE=utf8mb4_0900_ai_ci""")
-
-for query in queries:
-    MyCursor.execute(query)
-
-...
-
-# Inserting each row of the DataFrame to the MySQL table and committing
-for row_num in range(0, len(df_stacked)):
-    row_data = df_stacked.iloc[row_num]
-    value = (row_data[0], row_data[1], row_data[2])
-    sql = "INSERT INTO mrts (kind_of_business, value, period) VALUES (%s, %s, %s)"
-    MyCursor.execute(sql, value)
-
-cnx.commit()
-
+users = [
+ {"username": "testuser", "password": "testuser", "role": "admin"},
+    {"username": "John", "password": "John", "role": "reader"},
+    {"username": "Anne", "password": "Anne", "role": "admin"},
+    {"username": "Umang", "password": "Umang", "role": "admin"},
+    {"username": "Mike", "password": "Mike", "role": "reader"}
+]
 ```
 
 As a result, the data was effectively loaded into the database table, as shown below in Figure 1:
